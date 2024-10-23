@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="home.css">
+</head>
+<body class="bg-gray-100">
+    <%- include('header') %> <!-- Include the header here -->
+    
+    <div class="container mx-auto p-6">
+        <h2 class="text-center text-5xl font-bold mb-4">Welcome to Quiz Craze!</h2>
+        <p class="text-center text-xl mb-8">Enjoy our fun quizzes and challenge yourself!</p>
+
+        <h3 class="text-3xl font-semibold mb-4">Trending Quizzes</h3>
+        
+        <div class="flex overflow-x-auto scrolling-wrapper space-x-4">
+            <!-- Card 1 -->
+            <div class="card bg-white rounded-lg shadow-lg p-4 flex-none w-60">
+                <h5 class="card-title text-2xl font-semibold">Trending Quiz 1</h5>
+                <p class="card-text">Test your knowledge with this exciting quiz!</p>
+                <a href="/quiz" class="btn btn-primary bg-yellow-400 hover:bg-yellow-500 text-black rounded px-3 py-2">Take Quiz</a>
+            </div>
+    
+            <!-- Card 2 -->
+            <div class="card bg-white rounded-lg shadow-lg p-4 flex-none w-60">
+                <h5 class="card-title text-2xl font-semibold">Trending Quiz 2</h5>
+                <p class="card-text">Another fun quiz to challenge yourself!</p>
+                <a href="/quiz2" class="btn btn-primary bg-yellow-400 hover:bg-yellow-500 text-black rounded px-3 py-2">Take Quiz</a>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card bg-white rounded-lg shadow-lg p-4 flex-none w-60">
+                <h5 class="card-title text-2xl font-semibold">Trending Quiz 3</h5>
+                <p class="card-text">How much do you know about this topic?</p>
+                <a href="/quiz3" class="btn btn-primary bg-yellow-400 hover:bg-yellow-500 text-black rounded px-3 py-2">Take Quiz</a>
+            </div>
+    
+            <!-- Card 4 -->
+            <div class="card bg-white rounded-lg shadow-lg p-4 flex-none w-60">
+                <h5 class="card-title text-2xl font-semibold">Trending Quiz 4</h5>
+                <p class="card-text">Put your skills to the test with this quiz!</p>
+                <a href="/quiz4" class="btn btn-primary bg-yellow-400 hover:bg-yellow-500 text-black rounded px-3 py-2">Take Quiz</a>
+            </div>
+    
+            <!-- Card 5 -->
+            <div class="card bg-white rounded-lg shadow-lg p-4 flex-none w-60">
+                <h5 class="card-title text-2xl font-semibold">Trending Quiz 5</h5>
+                <p class="card-text">Take this quiz and see how you rank!</p>
+                <a href="/quiz5" class="btn btn-primary bg-yellow-400 hover:bg-yellow-500 text-black rounded px-3 py-2">Take Quiz</a>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer') %> <!-- Footer section -->
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+:root {
+    --neutral: #80817ff5;
+    --right: #17df17;
+    --wrong: #df3030;
+} 
+
+body {
+    background-color: #e4e274f5;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    max-width: 80%;
+    width: 100vh;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    width: 800px;
+    max-width: 80%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 6px 2px;
+}
+
+.hide {
+ display: none;
+}
+

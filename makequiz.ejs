@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz</title>
+    <link rel="stylesheet" href="makequiz.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            width: 60%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        select, input[type="text"], input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .question {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .option input[type="text"] {
+            width: 90%;
+        }
+
+        .option input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        #errorMessage {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Your Quiz</h1>
+        <form id="quizForm" action="/makequiz" method="POST">
+            <!-- Quiz Topic -->
+            <label for="quizTopic">Select Quiz Topic:</label>
+            <select id="quizTopic" name="quizTopic" required>
+                <option value="">-- Select Topic --</option>
+                <option value="science">Science</option>
+                <option value="math">Math</option>
+                <option value="english">English</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="physics">Physics</option>
+                <option value="general-knowledge">General Knowledge</option>
+                <option value="history">History</option>
+                <option value="technology">Technology</option>
+            </select>
+
+            <!-- Quiz Title -->
+            <label for="quizTitle">Quiz Title:</label>
+            <input type="text" id="quizTitle" name="quizTitle" placeholder="Enter quiz title" required>
+
+            <!-- Number of Questions -->
+            <label for="numQuestions">Number of Questions:</label>
+            <input type="number" id="numQuestions" name="numQuestions" min="1" max="100" placeholder="Enter number of questions" required>
+
+            <!-- Container for questions -->
+            <div id="questionsContainer"></div>
+
+            <!-- Add Question Button -->
+            <button type="button" id="addQuestionsBtn">Add Questions</button>
+
+            <!-- Error Message -->
+            <div id="errorMessage"></div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="publishBtn">Publish Quiz</button>
+        </form>
+    </div>
+
+    <script>
+        const questionsContainer = document.getElementById('questionsContainer');
+        const addQuestionsBtn = document.getElementById('addQuestionsBtn');
+        const quizForm = document.getElementById('quizForm');
+        const numQuestionsInput = document.getElementById('numQuestions');
+        let questionCount = 0;
+
+        // Function to add questions based on the number of questions
+        addQuestionsBtn.addEventListener('click', () => {
+            const numQuestions = parseInt(numQuestionsInput.value);
+
+            // Check if a valid number of questions is entered
+            if (isNaN(numQuestions) || numQuestions < 1 || numQuestions > 100) {
+                document.getElementById('errorMessage').textContent = "Please enter a valid number of questions between 1 and 100.";
+                return;
+            }
+
+            document.getElementById('errorMessage').textContent = ''; // Clear any previous error message
+
+            // Remove existing questions if any
+            questionsContainer.innerHTML = '';
+            questionCount = 0;
+
+            // Dynamically create the specified number of questions
+            for (let i = 1; i <= numQuestions; i++) {
+                questionCount++;
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <label for="question${i}">Question ${i}:</label>
+                    <input type="text" id="question${i}" name="question${i}" placeholder="Enter question" required>
+                    
+                    <label>Options:</label>
+                    <div class="option">
+                        <input type="radio" name="correctAnswer${i}" value="0" required>
+                        <input type="text" placeholder="Option 1" name="option${i}1" required>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="correctAnswer${i}" value="1" required>
+                        <input type="text" placeholder="Option 2" name="option${i}2" required>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="correctAnswer${i}" value="2" required>
+                        <input type="text" placeholder="Option 3" name="option${i}3" required>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="correctAnswer${i}" value="3" required>
+                        <input type="text" placeholder="Option 4" name="option${i}4" required>
+                    </div>
+                `;
+                questionsContainer.appendChild(questionDiv);
+            }
+        });
+
+        // Validate form before submission
+        quizForm.addEventListener('submit', function(event) {
+            if (questionCount === 0) {
+                event.preventDefault();
+                document.getElementById('errorMessage').textContent = "Please add questions before submitting.";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        h3 {
+            color: #343a40; /* Dark gray color for headings */
+        }
+
+        h4 {
+            margin-top: 20px; /* Margin above the section headings */
+        }
+
+        .list-group-item a {
+            text-decoration: none; /* Remove underline from links */
+            color: #007bff; /* Bootstrap primary link color */
+        }
+
+        .list-group-item a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        .badge {
+            font-size: 0.9rem; /* Adjust font size */
+            padding: 0.5em 0.75em; /* Adjust padding */
+        }
+
+        .edit-btn {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <!-- User Info Section -->
+            <div class="col-md-4 text-center">
+                <img src="boy2.jpeg" alt="Profile Picture" class="rounded-circle" width="150" height="150">
+                <h3 class="mt-3"><%= name %></h3> <!-- Dynamically display the username -->
+                <p class="text-muted"><%= email %></p> <!-- Display email dynamically if passed -->
+                <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
+            </div>
+
+            <!-- About and Quizzes Section -->
+            <div class="col-md-8">
+                <!-- About Me Section -->
+                <h4>About Me</h4>
+                <p><%= about %></p> <!-- Dynamically display the user's about text -->
+
+            
+
+    <!-- My Created Quizzes Section -->
+    <h4>My Created Quizzes</h4>
+    <ul class="list-group">
+        <% if (quizzes && quizzes.length > 0) { %>
+            <% quizzes.forEach(quiz => { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="/quiz/<%= quiz._id %>"><%= quiz.topic %></a>
+                    <span class="badge badge-primary">Created on: <%= new Date(quiz.createdAt).toLocaleDateString() %></span>
+                </li>
+            <% }) %>
+        <% } else { %>
+            <li class="list-group-item">You haven't created any quizzes yet.</li>
+        <% } %>
+    </ul>
+
+    <!-- Solved Quizzes Section -->
+    <h4>Quizzes I've Solved</h4>
+    <ul class="list-group">
+        <% if (solvedQuizzes && solvedQuizzes.length > 0) { %>
+            <% solvedQuizzes.forEach(result => { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="/quiz/<%= result.quizId._id %>"><%= result.quizId.topic %></a>
+                        <span class="badge badge-success">Score: <%= result.score %></span>
+                    </div>
+                    <% if (result.canRetake) { %>
+                        <a href="/quiz/retake/<%= result.quizId._id %>" class="btn btn-outline-secondary btn-sm">Retake</a>
+                    <% } else { %>
+                        <span class="text-muted">Retake not allowed</span>
+                    <% } %>
+                </li>
+            <% }) %>
+        <% } else { %>
+            <li class="list-group-item">You haven't solved any quizzes yet.</li>
+        <% } %>
+    </ul>
+</div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

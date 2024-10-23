@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="login.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .popup {
+            position: absolute;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form id="loginForm" action="/login" method="POST">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <i class='bx bx-user'></i>
+            </div>
+            <div class="input-box" style="position: relative;">
+                <input type="text" name="name" placeholder="Username" required>
+                <i class='bx bx-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <i class='bx bx-lock-alt'></i>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="register-link">Don't have an account? <a href="/signup">Sign-up!</a></div>
+        </form>
+    </div>
+
+    <script>
+        function showPopup(message, inputElement) {
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.textContent = message;
+            document.body.appendChild(popup);
+            
+            const rect = inputElement.getBoundingClientRect();
+            popup.style.top = `${rect.bottom + window.scrollY}px`;
+            popup.style.left = `${rect.left}px`;
+            popup.style.display = 'block';
+
+            setTimeout(() => {
+                popup.remove();
+            }, 3000);
+        }
+
+       // <% if (typeof errorMessage !== 'undefined') { %>
+             showPopup("<%= errorMessage %>", document.getElementById('email'));
+        // <% } %>
+    </script>
+</body>
+</html>

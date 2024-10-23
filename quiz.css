@@ -1,0 +1,78 @@
+*::before , *::after {
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+:root {
+    --neutral: #80817ff5;
+    --right: #17df17;
+    --wrong: #df3030;
+}    
+
+
+body {
+    background-color: rgba(106,188,199,255);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vh;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100vh;
+    max-width: 80%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 6px 2px;
+}
+
+.btn-grid {
+display: grid;
+grid-template-columns: repeat(2 , auto);
+gap: 10px;
+margin: 20px 0;
+}
+
+.btn {
+    border: 1px solid var(--neutral);
+    background-color: var(--neutral);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    outline: none;
+}
+
+.btn:hover {
+    border-color: black;
+}
+.btn.right{
+    background-color: var(--right);
+    color: black;
+
+}
+
+.btn.wrong{
+    background-color: var(--wrong);
+    color: black;
+}
+
+.start-btn  , .next-btn{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.hide {
+    display: none;
+}
+
